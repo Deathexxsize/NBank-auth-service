@@ -1,0 +1,20 @@
+server:
+  port: 9090
+
+spring:
+  application:
+    name: auth-service
+  datasource:
+    url:
+    username:
+    password:
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+
+jwt:
+  secret: rE0kkGwPG8QzqawkOUbLOUlkv/wEwZkLtS1nRmnkSHKInyfl3DVrzSCfTsOTYUBaChQK0rlP3waWT43QW/Fzug==
+  expiration: 900000
+  refreshExpiration: 604800000
