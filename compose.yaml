@@ -1,10 +1,10 @@
 services:
   postgres:
     image: 'postgres:latest'
-    container_name: alpha_postgres
+    container_name: auth-postgres
     environment:
-      - 'POSTGRES_DB=mydatabase'
+      - 'POSTGRES_DB=authw'
       - 'POSTGRES_PASSWORD=7482040607'
       - 'POSTGRES_USER=postgres'
     ports:
-      - '5432'
+      - '5440:5432'

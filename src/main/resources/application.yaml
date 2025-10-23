@@ -5,9 +5,9 @@ spring:
   application:
     name: auth-service
   datasource:
-    url:
-    username:
-    password:
+    url: jdbc:postgresql://localhost:5440/authw
+    username: postgres
+    password: 7482040607
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -16,5 +16,5 @@ spring:
 
 jwt:
   secret: rE0kkGwPG8QzqawkOUbLOUlkv/wEwZkLtS1nRmnkSHKInyfl3DVrzSCfTsOTYUBaChQK0rlP3waWT43QW/Fzug==
-  expiration: 900000
-  refreshExpiration: 604800000
+  expiration: 900000 # 15 min
+  refreshExpiration: 604800000 # 7 days

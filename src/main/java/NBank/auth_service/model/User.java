@@ -31,13 +31,13 @@ public class User {
     @Column(nullable = false)
     private String password;
     @Enumerated(value = EnumType.STRING)
-    private Role roles;
+    private Role roles = Role.USED;
     @Column(name = "is_enable", nullable = false)
-    private Boolean enable;
+    private Boolean enable = true;
     @Column(name = "is_locked", nullable = false)
-    private Boolean locked;
+    private Boolean locked = false;
     @Column(name = "created_at", nullable = false)
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     @OneToMany(mappedBy = "user")
     private List<RefreshToken> refreshTokens = new ArrayList<>();

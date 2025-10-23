@@ -1,4 +1,9 @@
 package NBank.auth_service.dto;
 
-public class RegisterResponse {
+import java.util.UUID;
+
+public record RegisterResponse(
+        UUID id,
+        String message
+) {
 }
