@@ -1,6 +1,5 @@
 package NBank.auth_service.service;
 
-import NBank.auth_service.model.UserPrincipal;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
@@ -11,6 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.crypto.SecretKey;
 import java.util.Date;
 import java.util.Map;
+import java.util.UUID;
 import java.util.function.Function;
 
 @Service
@@ -30,17 +30,17 @@ public class JwtService {
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public String generateAccessToken(UserPrincipal user) {
+    public String generateAccessToken(UUID userId, String email) {
         Map<String, Object> claims = Map.of(
-                "userId", user.getId(),
-                "email", user.getUsername() // this is email, not username
+                "userId", userId,
+                "email", email
         );
 
-        return buildToken(claims, user.getUsername(), jwtExpiration);
+        return buildToken(claims, email, jwtExpiration);
     }
 
-    public String generateRefreshToken(UserPrincipal user) {
-        return buildToken(Map.of(), user.getUsername(), refreshExpiration);
+    public String generateRefreshToken(String email) {
+        return buildToken(Map.of(), email, refreshExpiration);
     }
 
     private String buildToken(Map<String, Object> claims, String subject, long expiration) {

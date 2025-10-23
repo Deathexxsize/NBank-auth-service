@@ -4,7 +4,7 @@ import NBank.auth_service.clients.UserClient;
 import NBank.auth_service.dto.RegisterRequest;
 import NBank.auth_service.dto.RegisterResponse;
 import NBank.auth_service.model.User;
-import NBank.auth_service.repository.RegistrationRepository;
+import NBank.auth_service.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class RegistrationService {
     private final ValidationService validationService;
-    private final RegistrationRepository registerRepo;
+    private final UserRepository userRepo;
     private final UserClient userClient;
     private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);
 
@@ -37,13 +37,15 @@ public class RegistrationService {
         authUser.setPassword(encoder.encode(request.password()));
         authUser.setCreatedAt(LocalDateTime.now());
 
-        registerRepo.save(authUser);
+        userRepo.save(authUser);
 
         try {
             // userClient.createUserProfile(request); еще не реализовано
         } catch (Exception e) {
             throw new RuntimeException("Ошибка при создании профиля в User Service", e);
         }
-        return new RegisterResponse(authUser.getId(), "Success");
+        return new RegisterResponse(
+                authUser.getId(),
+                "Success");
     }
 }
