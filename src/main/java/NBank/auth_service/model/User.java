@@ -6,9 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.UuidGenerator;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +21,7 @@ import java.util.UUID;
 @Setter
 public class User {
     @Id
-    @UuidGenerator
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     @Column(length = 128, nullable = false)
     private String email;
@@ -31,13 +30,13 @@ public class User {
     @Column(nullable = false)
     private String password;
     @Enumerated(value = EnumType.STRING)
-    private Role roles = Role.USED;
+    private Role roles = Role.USER;
     @Column(name = "is_enable", nullable = false)
     private Boolean enable = true;
     @Column(name = "is_locked", nullable = false)
     private Boolean locked = false;
     @Column(name = "created_at", nullable = false)
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private Instant createdAt;
 
     @OneToMany(mappedBy = "user")
     private List<RefreshToken> refreshTokens = new ArrayList<>();

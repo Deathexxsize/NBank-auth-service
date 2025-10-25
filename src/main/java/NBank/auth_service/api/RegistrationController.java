@@ -1,6 +1,7 @@
 package NBank.auth_service.api;
 
-import NBank.auth_service.dto.RegisterRequest;
+import NBank.auth_service.dto.registrationDTOs.RegisterRequest;
+import NBank.auth_service.dto.registrationDTOs.RegisterResponse;
 import NBank.auth_service.service.RegistrationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +17,7 @@ public class RegistrationController {
     private final RegistrationService registerService;
 
     @PostMapping("/register")
-    public ResponseEntity< ? > register(
-            @RequestBody RegisterRequest request
-            ) {
-        registerService.userRegister(request);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<RegisterResponse> register(@RequestBody RegisterRequest request) {
+        return ResponseEntity.ok(registerService.userRegister(request));
     }
 }

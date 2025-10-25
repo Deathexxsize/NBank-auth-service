@@ -1,4 +1,4 @@
-package NBank.auth_service.dto;
+package NBank.auth_service.dto.registrationDTOs;
 
 import java.util.Date;
 

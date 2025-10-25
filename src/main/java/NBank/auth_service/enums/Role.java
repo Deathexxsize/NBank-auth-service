@@ -1,7 +1,7 @@
 package NBank.auth_service.enums;
 
 public enum Role {
-    USED,
+    USER,
     MANAGER,
     ADMIN
 }
